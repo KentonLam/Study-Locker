@@ -18,7 +18,8 @@ namespace ProcessWatcher
             Console.ReadLine();
         }
         }
-    class Watcher { 
+    class Watcher {
+        // http://stackoverflow.com/questions/967646/monitor-when-an-exe-is-launched
         ManagementEventWatcher startWatch;
         ManagementEventWatcher stopWatch;
         public void WaitForProcess()
