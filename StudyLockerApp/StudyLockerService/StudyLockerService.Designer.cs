@@ -1,6 +1,6 @@
 ﻿namespace StudyLockerService
 {
-    partial class Service1
+    partial class StudyLockerService
     {
         /// <summary> 
         /// Required designer variable.
