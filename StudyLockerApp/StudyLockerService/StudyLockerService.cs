@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace StudyLockerService
 {
-    public partial class Service1 : ServiceBase
+    public partial class StudyLockerService : ServiceBase
     {
-        public Service1()
+        public StudyLockerService()
         {
             InitializeComponent();
         }
