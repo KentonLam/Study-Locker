@@ -63,20 +63,11 @@ namespace StudyLockerService
             eventLog1.WriteEntry("Stopped");
         }
 
-        public string GetData(int value)
+        string IStudyLockerWCF.SetProgramList(ProgramList list)
         {
-            return "asadf: " + value.ToString();
-        }
-
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            throw new NotImplementedException();
-        }
-
-        public decimal DecimalTest(decimal value)
-        {
-            eventLog1.WriteEntry("Received: " + value.ToString());
-            return value + new decimal(128);
+            eventLog1.WriteEntry(string.Join(",", list.Programs), EventLogEntryType.Warning);
+            list.Programs.Add("TEST");
+            return list.ToString();
         }
     }
     class Watcher

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudyLockerWCF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -17,11 +18,17 @@ namespace WCFTest
 
             StudyLockerWCF.IStudyLockerWCF pipeProxy = pipeFactory.CreateChannel();
 
+            List < string> test = new List<string>();
             while (true)
             {
-                Console.Write("\n: ");
-                Console.WriteLine(pipeProxy.DecimalTest(new Decimal(Convert.ToInt32(Console.ReadLine()))));
-
+                Console.Write(": ");
+                test.Add(Console.ReadLine());
+                if (test.Last() == "end")
+                {
+                    Console.WriteLine(pipeProxy.SetProgramList(new ProgramList() { Programs = test }));
+                    Console.WriteLine(string.Join("|", test));
+                    test.Clear();
+                }
             }
         }
     }
