@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyLockerApp", "StudyLock
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyLockerService", "StudyLockerService\StudyLockerService.csproj", "{DF8B0AAC-DE34-4464-A27B-4166FF978D6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyLockerWCF", "StudyLockerWCF\StudyLockerWCF.csproj", "{9CE61F77-F1F9-414C-9E8F-1C33E7387557}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyLockerProtocol", "StudyLockerWCF\StudyLockerProtocol.csproj", "{9CE61F77-F1F9-414C-9E8F-1C33E7387557}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFTest", "WCFTest\WCFTest.csproj", "{F310E585-A1FF-4143-9F39-9AFE4E1EF439}"
 EndProject

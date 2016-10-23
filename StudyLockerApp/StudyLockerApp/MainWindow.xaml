@@ -1,12 +1,16 @@
-﻿<Window x:Class="StudyLockerApp.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyLockerApp"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:StudyLockerProtocol="clr-namespace:StudyLockerProtocol;assembly=StudyLockerProtocol" x:Class="StudyLockerApp.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Button x:Name="button" Content="Send" Margin="10,0,0,10" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Bottom" Click="button_Click"/>
+        <DataGrid x:Name="dataGrid" Margin="10,35" IsSynchronizedWithCurrentItem="True" >
+
+        </DataGrid>
     </Grid>
 </Window>
