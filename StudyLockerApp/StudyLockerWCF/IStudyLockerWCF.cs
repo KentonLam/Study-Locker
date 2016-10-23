@@ -12,13 +12,7 @@ namespace StudyLockerWCF
     public interface IStudyLockerWCF
     {
         [OperationContract]
-        string GetData(int value);
-
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-
-        [OperationContract]
-        decimal DecimalTest(decimal value);
+        string SetProgramList(ProgramList list);
 
         // TODO: Add your service operations here
     }

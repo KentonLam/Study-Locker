@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace StudyLockerWCF
 {
-    public class Class1
-
+    public class ProgramList
     {
-        public decimal test { get; set; }
+        public List<string> Programs { get; set; }
+
     }
 }
