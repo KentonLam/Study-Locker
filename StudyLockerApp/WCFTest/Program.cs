@@ -22,7 +22,7 @@ namespace WCFTest
             while (true)
             {
                 Console.Write(": ");
-                
+                test.Add(Console.ReadLine());
                 if (test.Last() == "end")
                 {
                     ProgramList prog = new ProgramList();
@@ -36,7 +36,7 @@ namespace WCFTest
                 }
                 else
                 {
-                    test.Add(Console.ReadLine());
+                    
                 }
             }
         }
