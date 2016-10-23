@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudyLockerProtocol;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,31 @@ namespace StudyLockerApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public StudyLockerProtocol.ProgramList programList { get; set; }
+
+        ServiceCommunication comm = new ServiceCommunication();
+
         public MainWindow()
         {
             InitializeComponent();
+
+
+            this.programList = comm.PipeProxy.GetProgramList();
+            //this.programList.Programs.Add(new StudyLockerProtocol.ProgramSpec() { FileName = "Notepad.exe" });
+            this.dataGrid.CanUserAddRows = true;
+            this.dataGrid.ItemsSource = programList.Programs;
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(string.Join("|", programList.Programs));
+
+            this.programList.Programs = this.programList.Programs.Where(a => !string.IsNullOrWhiteSpace(a.FileName)).ToList();
+
+            this.programList = comm.PipeProxy.SetProgramList(this.programList);
+            this.dataGrid.ItemsSource = programList.Programs;
+
+            this.dataGrid.Items.Refresh();
         }
     }
 }

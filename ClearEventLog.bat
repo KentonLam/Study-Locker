@@ -1,0 +1,1 @@
+wevtutil cl "Study Locker"

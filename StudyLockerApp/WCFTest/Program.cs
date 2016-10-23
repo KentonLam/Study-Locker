@@ -1,4 +1,4 @@
-﻿using StudyLockerWCF;
+﻿using StudyLockerProtocol;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +12,11 @@ namespace WCFTest
     {
         static void Main(string[] args)
         {
-            ChannelFactory<StudyLockerWCF.IStudyLockerWCF> pipeFactory = new ChannelFactory<StudyLockerWCF.IStudyLockerWCF>(
+            ChannelFactory<StudyLockerProtocol.IStudyLockerWCF> pipeFactory = new ChannelFactory<StudyLockerProtocol.IStudyLockerWCF>(
                 new NetNamedPipeBinding(),
-                new EndpointAddress("net.pipe://localhost"));
+                new EndpointAddress("net.pipe://localhost/StudyLocker"));
 
-            StudyLockerWCF.IStudyLockerWCF pipeProxy = pipeFactory.CreateChannel();
+            StudyLockerProtocol.IStudyLockerWCF pipeProxy = pipeFactory.CreateChannel();
 
             List < string> test = new List<string>();
             while (true)
@@ -25,7 +25,7 @@ namespace WCFTest
                 test.Add(Console.ReadLine());
                 if (test.Last() == "end")
                 {
-                    Console.WriteLine(pipeProxy.SetProgramList(new ProgramList() { Programs = test }));
+                    //Console.WriteLine(pipeProxy.SetProgramList(new ProgramList() { Programs = test }));
                     Console.WriteLine(string.Join("|", test));
                     test.Clear();
                 }

@@ -51,9 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StudyLockerWCF\StudyLockerWCF.csproj">
+    <ProjectReference Include="..\StudyLockerWCF\StudyLockerProtocol.csproj">
       <Project>{9ce61f77-f1f9-414c-9e8f-1c33e7387557}</Project>
-      <Name>StudyLockerWCF</Name>
+      <Name>StudyLockerProtocol</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

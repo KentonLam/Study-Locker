@@ -8,16 +8,20 @@ using System.Management;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
-using StudyLockerWCF;
+using StudyLockerProtocol;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 
 namespace StudyLockerService
 {
-    public partial class StudyLockerService : ServiceBase, StudyLockerWCF.IStudyLockerWCF
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    public partial class StudyLockerService : ServiceBase, StudyLockerProtocol.IStudyLockerWCF
     {
         ManagementEventWatcher processStartWatch;
 
         ServiceHost wcfHost;
+
+        ProgramList activeList = new ProgramList();
 
         public StudyLockerService()
         {
@@ -39,7 +43,18 @@ namespace StudyLockerService
 
         private void ProcessStartWatch_EventArrived(object sender, EventArrivedEventArgs e)
         {
-            eventLog1.WriteEntry("Process started: " + e.NewEvent.Properties["ProcessName"].Value);
+            
+            string name = e.NewEvent.Properties["ProcessName"].Value.ToString();
+            //eventLog1.WriteEntry("Process started: " + name);
+            foreach (ProgramSpec blocked in this.activeList.Programs)
+            {
+                if (blocked.FileName.ToLowerInvariant() == name.ToLowerInvariant())
+                {
+                    Process proc = Process.GetProcessById(Convert.ToInt32(e.NewEvent.Properties["ProcessID"].Value));
+                    proc.Kill();
+                    eventLog1.WriteEntry("Killed: " + name);
+                }
+            }
         }
 
         protected override void OnStart(string[] args)
@@ -49,9 +64,12 @@ namespace StudyLockerService
 
             Uri pipeUri = new Uri("net.pipe://localhost");
             wcfHost = new ServiceHost(typeof(StudyLockerService), pipeUri);
-            wcfHost.AddServiceEndpoint(typeof(StudyLockerWCF.IStudyLockerWCF), new NetNamedPipeBinding(), "");
-            wcfHost.Open();
+            wcfHost.AddServiceEndpoint(typeof(StudyLockerProtocol.IStudyLockerWCF), new NetNamedPipeBinding(), "StudyLocker");
+            
+            ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
+            wcfHost.Description.Behaviors.Add(smb);
 
+            wcfHost.Open();
 
             eventLog1.WriteEntry("Started");
         }
@@ -63,45 +81,18 @@ namespace StudyLockerService
             eventLog1.WriteEntry("Stopped");
         }
 
-        string IStudyLockerWCF.SetProgramList(ProgramList list)
+        ProgramList IStudyLockerWCF.SetProgramList(ProgramList list)
         {
             eventLog1.WriteEntry(string.Join(",", list.Programs), EventLogEntryType.Warning);
-            list.Programs.Add("TEST");
-            return list.ToString();
-        }
-    }
-    class Watcher
-    {
-        // http://stackoverflow.com/questions/967646/monitor-when-an-exe-is-launched
-        ManagementEventWatcher startWatch;
-        ManagementEventWatcher stopWatch;
-        public void WaitForProcess()
-        {
-            ManagementEventWatcher startWatch = new ManagementEventWatcher(
-              new WqlEventQuery("SELECT * FROM Win32_ProcessStartTrace"));
-            startWatch.EventArrived
-                                += new EventArrivedEventHandler(startWatch_EventArrived);
-            startWatch.Start();
-
-            ManagementEventWatcher stopWatch = new ManagementEventWatcher(
-              new WqlEventQuery("SELECT * FROM Win32_ProcessStopTrace"));
-            stopWatch.EventArrived
-                                += new EventArrivedEventHandler(stopWatch_EventArrived);
-            stopWatch.Start();
+            if (list != null)
+                this.activeList = list;
+            return list;
         }
 
-        void stopWatch_EventArrived(object sender, EventArrivedEventArgs e)
+        ProgramList IStudyLockerWCF.GetProgramList()
         {
-            //stopWatch.Stop();
-            Console.WriteLine("Process stopped: {0}"
-                              , e.NewEvent.Properties["ProcessName"].Value);
-        }
-
-        void startWatch_EventArrived(object sender, EventArrivedEventArgs e)
-        {
-            //startWatch.Stop();
-            Console.WriteLine("Process started: {0}"
-                              , e.NewEvent.Properties["ProcessName"].Value);
+            eventLog1.WriteEntry("Sending list: " + string.Join(",", this.activeList.Programs));
+            return this.activeList;
         }
     }
 }
