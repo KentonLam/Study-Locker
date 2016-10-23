@@ -22,12 +22,21 @@ namespace WCFTest
             while (true)
             {
                 Console.Write(": ");
-                test.Add(Console.ReadLine());
+                
                 if (test.Last() == "end")
                 {
-                    //Console.WriteLine(pipeProxy.SetProgramList(new ProgramList() { Programs = test }));
+                    ProgramList prog = new ProgramList();
+                    foreach (string p in test)
+                    {
+                        prog.Programs.Add(new ProgramSpec() { FileName = p });
+                    }
+                    pipeProxy.SetProgramList(prog);
                     Console.WriteLine(string.Join("|", test));
                     test.Clear();
+                }
+                else
+                {
+                    test.Add(Console.ReadLine());
                 }
             }
         }
