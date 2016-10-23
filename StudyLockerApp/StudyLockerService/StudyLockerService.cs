@@ -8,12 +8,16 @@ using System.Management;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
+using StudyLockerWCF;
+using System.ServiceModel;
 
 namespace StudyLockerService
 {
-    public partial class StudyLockerService : ServiceBase
+    public partial class StudyLockerService : ServiceBase, StudyLockerWCF.IStudyLockerWCF
     {
         ManagementEventWatcher processStartWatch;
+
+        ServiceHost wcfHost;
 
         public StudyLockerService()
         {
@@ -30,6 +34,7 @@ namespace StudyLockerService
                 new WqlEventQuery("SELECT * FROM Win32_ProcessStartTrace"));
             processStartWatch.EventArrived += ProcessStartWatch_EventArrived;
             processStartWatch.Start();
+            
         }
 
         private void ProcessStartWatch_EventArrived(object sender, EventArrivedEventArgs e)
@@ -39,12 +44,39 @@ namespace StudyLockerService
 
         protected override void OnStart(string[] args)
         {
+            if (this.wcfHost != null)
+                this.wcfHost.Close();
+
+            Uri pipeUri = new Uri("net.pipe://localhost");
+            wcfHost = new ServiceHost(typeof(StudyLockerService), pipeUri);
+            wcfHost.AddServiceEndpoint(typeof(StudyLockerWCF.IStudyLockerWCF), new NetNamedPipeBinding(), "");
+            wcfHost.Open();
+
+
             eventLog1.WriteEntry("Started");
         }
 
         protected override void OnStop()
         {
+            if (this.wcfHost != null)
+                this.wcfHost.Close();
             eventLog1.WriteEntry("Stopped");
+        }
+
+        public string GetData(int value)
+        {
+            return "asadf: " + value.ToString();
+        }
+
+        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal DecimalTest(decimal value)
+        {
+            eventLog1.WriteEntry("Received: " + value.ToString());
+            return value + new decimal(128);
         }
     }
     class Watcher
