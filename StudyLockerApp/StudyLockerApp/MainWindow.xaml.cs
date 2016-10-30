@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,8 +30,24 @@ namespace StudyLockerApp
         {
             InitializeComponent();
 
+            bool exceptionCaught = true;
+            while (exceptionCaught)
+            {
+                exceptionCaught = false;
+                try
+                {
+                    this.programList = comm.PipeProxy.GetProgramList();
+                }
+                catch (EndpointNotFoundException e)
+                {
+                    MessageBox.Show("Could not connect to service. Program will now crash.\n\n"+
+                        e.ToString(), "Study Locker Init Error",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    exceptionCaught = true;
+                }
+            }
 
-            this.programList = comm.PipeProxy.GetProgramList();
+
             //this.programList.Programs.Add(new StudyLockerProtocol.ProgramSpec() { FileName = "Notepad.exe" });
             this.dataGrid.CanUserAddRows = true;
             this.dataGrid.ItemsSource = programList.Programs;
