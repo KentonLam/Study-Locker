@@ -60,6 +60,8 @@
     <Compile Include="ProgramList.cs" />
     <Compile Include="ProgramSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebsiteList.cs" />
+    <Compile Include="WebsiteSpec.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

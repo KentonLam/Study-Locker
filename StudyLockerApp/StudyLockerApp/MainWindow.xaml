@@ -1,16 +1,27 @@
-﻿<Window
+﻿<Controls:MetroWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyLockerApp"
         xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:StudyLockerProtocol="clr-namespace:StudyLockerProtocol;assembly=StudyLockerProtocol" x:Class="StudyLockerApp.MainWindow"
+                          xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button x:Name="button" Content="Send" Margin="10,0,0,10" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Bottom" Click="button_Click"/>
-        <DataGrid x:Name="dataGrid" Margin="10,35" IsSynchronizedWithCurrentItem="True" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="button" Content="Send List" Margin="10,0,0,10" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Bottom" Click="button_Click"/>
+        <DataGrid x:Name="dataGrid" Margin="10,31,10,35" IsSynchronizedWithCurrentItem="True" >
 
         </DataGrid>
+        <DataGrid x:Name="dataGrid1" Grid.Column="1" Margin="10,31,10,35" IsSynchronizedWithCurrentItem="True">
+        </DataGrid>
+        <Button x:Name="button1" Content="Send Sites" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Click="button1_Click" Height="20" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="App Blocks" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Website Blocks" VerticalAlignment="Top"/>
     </Grid>
-</Window>
+</Controls:MetroWindow>

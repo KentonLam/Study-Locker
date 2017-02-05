@@ -17,6 +17,12 @@ namespace StudyLockerProtocol
         [OperationContract]
         ProgramList GetProgramList();
 
+        
+        [OperationContract]
+        WebsiteList SetWebsiteList(WebsiteList list);
+
+        [OperationContract]
+        WebsiteList GetWebsiteList();
         // TODO: Add your service operations here
     }
 
