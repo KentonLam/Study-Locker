@@ -1,4 +1,4 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿
 using StudyLockerProtocol;
 using System;
 using System.Collections.Generic;
@@ -74,7 +74,7 @@ namespace StudyLockerApp
             string message = "Now blocking programs";
             if (this.programList.Programs.Count == 0)
                 message = "All programs unblocked";
-            await this.ShowMessageAsync(message, string.Join(", ", programList.Programs));
+            //await this.ShowMessageAsync(message, string.Join(", ", programList.Programs));
 
             this.dataGrid.ItemsSource = programList.Programs;
 
@@ -89,7 +89,7 @@ namespace StudyLockerApp
             string message = "Now blocking websites";
             if (this.programList.Programs.Count == 0)
                 message = "All websites unblocked";
-            await this.ShowMessageAsync(message, string.Join(", ", this.websiteList.Sites));
+            //await this.ShowMessageAsync(message, string.Join(", ", this.websiteList.Sites));
 
             this.comm.PipeProxy.SetWebsiteList(this.websiteList);
         }
