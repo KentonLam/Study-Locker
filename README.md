@@ -32,7 +32,7 @@ Run the `InstallService.bat` and follow the prompts to uninstall the service.
 
 ## License
 
-This project is licensed under the GNU GPLv3 license - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU GPLv3 license - see the [LICENSE.txt](LICENSE.txt) file for details
 
 ## Acknowledgments  
 
