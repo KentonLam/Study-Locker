@@ -1,32 +1,39 @@
-# You've added your first ReadMe file!
-A README.md file is intended to quickly orient readers to what your project can do.  New to Markdown? [Learn more](http://go.microsoft.com/fwlink/p/?LinkId=524306&clcid=0x409)
+# Study Locker
 
-## Edit this ReadMe and commit your change to a topic branch
-In Git, branches are cheap.  You should use them whenever you're making changes to your repository.  Edit this file by clicking on the edit icon.
+Study Locker is an end-user solution to staying on task my mitigiating distractions.
 
-Then make some changes to this ReadMe file.
+**Disclaimer:** This project is currently shelved, hence is very buggy and may not even work. The authors are not responsible for any damages or loss of data by using this program.
 
-> Make some **edits** to _this_ blockquote
+## Getting Started
 
-When you are done, click the dropdown arrow next to the save button - that will allow you to commit your changes to a new branch.
+### Prerequisites
 
-## Create a pull request to contribute your changes back into master
-Pull requests are the way to move changes from a topic branch back into the master branch.
+To build and install the project you'll need Visual Studio 2015 or later with:
+* .NET Desktop development tools
+* Windows Communication Foundation Component
 
-Click on the **Pull Requests** page in the **CODE** hub, then click "New Pull Request" to create a new pull request from your topic branch to the master branch.
+### Building & Installing
 
-When you are done adding details, click "Create Pull request". Once a pull request is sent, reviewers can see your changes, recommend modifications, or even push follow-up commits.
+In the `StudyLockerApp` solution, build the `StudyLockerService` and the `StudyLockerApp`. Install the service using the `InstallService.bat` and start it using task manager or the services app. 
 
-First time creating a pull request?  [Learn more](http://go.microsoft.com/fwlink/?LinkId=533211&clcid=0x409)
+### Usage
 
-### Congratulations! You've completed the grand tour of the CODE hub!
+Study Locker is controlled from the StudyLockerApp UI, add websites or executable names to be blocked. To turn off Study Locker, remove everything from the list.
 
-# Next steps
+### Uninstalling
+Run the `InstallService.bat` and follow the prompts to uninstall the service.
 
-If you haven't done so yet:
-* [Install Visual Studio](http://go.microsoft.com/fwlink/?LinkId=309297&clcid=0x409&slcid=0x409)
-* [Install Git](http://git-scm.com/downloads)
+## Authors
 
-Then clone this repo to your local machine to get started with your own project.
+* [Kenton Lam](https://github.com/KentonLam/)
+* [James Dearlove](https://github.com/JamesDearlove/)
+* [Jason Hassell](https://github.com/Hackerman02)
+* Rabih Halik
 
-Happy coding!
+## License
+
+This project is licensed under the GNU GPLv3 license - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments  
+
+* [Json.net](https://www.newtonsoft.com/json) - Licensed under the MIT Licence
