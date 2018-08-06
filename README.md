@@ -1,6 +1,6 @@
 # Study Locker
 
-Study Locker is an end-user solution to staying on task my mitigiating distractions.
+Study Locker is an end-user solution to staying on task by mitigating distractions.
 
 **Disclaimer:** This project is currently shelved, hence is very buggy and may not even work. The authors are not responsible for any damages or loss of data by using this program.
 
